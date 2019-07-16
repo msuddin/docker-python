@@ -1,3 +1,5 @@
 .idea*
 *.iml
-sample_python/*.pyc
+isample_python/*.pyc
+test/*.pyc
+*.pyc
