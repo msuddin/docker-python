@@ -3,3 +3,4 @@
 isample_python/*.pyc
 test/*.pyc
 *.pyc
+venv/*
