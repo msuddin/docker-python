@@ -9,6 +9,15 @@ Answer: To get a simple understanding of Python and how to write tests in it
 * An __init__.py file is needed in each directory to allow the python interpreter to mark the directory as a module
 * To understand how to write tests in Python (see Testing section below)
 
+## Requirements
+You need to have pytest installed.
+```
+pip install pytests
+```
+```
+pip install pytest-bdd
+```
+
 ## Instructions on running
 From the root directory of the project, run the following command:
 ```
