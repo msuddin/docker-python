@@ -1,4 +1,4 @@
-from sample_python.matured_hero import MaturedHero
+from application.matured_hero import MaturedHero
 
 name = "bruce"
 base_level = 2500

@@ -1,5 +1,5 @@
-from sample_python.base_hero import BaseHero
-from sample_python.matured_hero import MaturedHero
+from application.base_hero import BaseHero
+from application.matured_hero import MaturedHero
 
 robin = BaseHero("Damian Wayne", 1500)
 print(robin.describe_hero())

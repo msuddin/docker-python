@@ -1,6 +1,6 @@
 import unittest
 
-from sample_python.base_hero import BaseHero
+from application.base_hero import BaseHero
 
 class TestBaseHero(unittest.TestCase):
 
