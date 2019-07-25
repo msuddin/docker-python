@@ -4,4 +4,4 @@ COPY . ./sample-python/.
 
 WORKDIR sample-python
 
-RUN pip3 install pytest && pytest
+RUN python3 -m unittest test/suite_smoke.py

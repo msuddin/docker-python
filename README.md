@@ -6,18 +6,9 @@ Question: What is the purpose of this project?
 
 Answer: To get a simple understanding of Python and how to write tests in it
 * Python does not have an entry point like Java, C++, C# etc. Each line of each file is executed sequentially
-* An __init__.py file is needed in each directory to allow the python interpreter to mark the directory as a module
+* An '__init__.py' file is needed in each directory to allow the python interpreter to mark the directory as a module
 * To understand how to write tests in Python (see Testing section below)
 * To run the tests insigh a docker container (via both Dockerfile and docker-compose.yml)
-
-## Requirements
-You need to have pytest installed.
-```
-pip install pytests
-```
-```
-pip install pytest-bdd
-```
 
 ## Instructions on running
 ### Running the sample script
@@ -34,13 +25,17 @@ Damian Wayne is not strong enough
 
 ### Testing
 This project uses two flavours of tests.
-* Python has a good selection of test runners - the built in one being UnitTest and another popular one being PyTest
-* Python has a built in test library called unittest - see test/test_base_hero.py to see an example of unittest
+* Python has a good selection of test runners - unittest (which python provides as a stand along library) and pytest (an extension library to unittest)
+* Python has a built in test library called unittest - see test/test_base_hero_robin.py to see an example of unittest
 * An example of a test written suitable for pyTest can be seen in test/test_matured_hero.py
+* A test suite to run only a selection of tests (note that this test suite only works with the unittest test runner) - example can be seen at test/suite_smoke.py
+* One of the tests is marked as ignore
 
 #### Running Tests
 
 ##### UnitTest Runner
+
+###### Run all Tests using 'Discover'
 You can run tests using the unittest runner ('discover' will by default find all tests and run them):
 ```
 python3 -m unittest discover
@@ -62,6 +57,58 @@ Ran 2 tests in 0.000s
 
 FAILED (failures=1)
 ```
+
+###### Run a specific test
+You can run a specific test using the command below:
+```
+python3 -m unittest test/test_base_hero_robin.py -v
+```
+Sample Output:
+```
+test_base_hero_base_level (test.test_base_hero_robin.TestBaseHero) ... FAIL
+test_base_hero_base_level_wonder_women (test.test_base_hero_robin.TestBaseHero) ... skipped 'This test will throw an error and does not belong in this test class'
+test_base_hero_name (test.test_base_hero_robin.TestBaseHero) ... ok
+
+======================================================================
+FAIL: test_base_hero_base_level (test.test_base_hero_robin.TestBaseHero)
+----------------------------------------------------------------------
+....
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+FAILED (failures=1, skipped=1)
+```
+###### Run a test suite
+You can run a test suite using the command below:
+```
+python3 -m unittest test/suite_smoke.py -v
+```
+Sample Output:
+```
+test_base_hero_base_level (test.test_base_hero_robin.TestBaseHero) ... FAIL
+test_base_hero_base_level_wonder_women (test.test_base_hero_robin.TestBaseHero) ... skipped 'This test will throw an error and does not belong in this test class'
+test_base_hero_name (test.test_base_hero_robin.TestBaseHero) ... ok
+...
+======================================================================
+FAIL: test_base_hero_base_level (test.test_base_hero_robin.TestBaseHero)
+----------------------------------------------------------------------
+....
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+FAILED (failures=1, skipped=1)
+
+----------------------------------------------------------------------
+Ran 0 tests in 0.000s
+```
+
+Notes on Suites:
+* The test suite does not work with pytest i.e. running pytest will not execute suite_smoke.py and any tests outlined in it
+* A test loader, suite and runner need to be identified for each suite test runner
+* Each test module is added to the suite via the test loader
+* The suite is then added to the runner via unittest test runner
+* See test/suite_somke.py
+
 ##### PyTest Runner
 You can run unittest tests using PyTest runner (PyTest by default is also able to run any test written with unittest in mind):
 ```
@@ -196,3 +243,4 @@ ERROR: Service 'sample_python' failed to build: The command '/bin/sh -c pip3 ins
 ```
 pip3 install -U pytest
 ```
+* The Dockerfile is using pytest to run tests. It is not using unittest therefore the test suite is not running
